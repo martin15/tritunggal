@@ -1,0 +1,43 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Contact Us</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li class="active">Contact Us</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th class="green-link"><%= sortable("name", "Name") %></th>
+        <th class="green-link"><%= sortable("email", "Email") %></th>
+        <th>Subject</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contact_us_list.each_with_index do |contact_us, x| %>
+        <tr>
+          <th><%= @no+x+1 %></th>
+          <td><%= contact_us.name %></td>
+          <td><%= contact_us.email %></td>
+          <td><%= contact_us.subject %></td>
+          <td>
+            <%= link_to "Show", admin_contact_us_path(contact_us.id), :class => "btn btn-success" %>
+            <%= link_to "Delete", admin_delete_contact_us_path(contact_us.id ), :method => :delete,
+                                  :data => {:confirm => "Are you sure?"}, :class => "btn btn-warning" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="col-xs-12 no_padding_lr pagination"><%= paginate @contact_us_list %></div>
+</div>

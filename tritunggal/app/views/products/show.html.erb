@@ -1,0 +1,88 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag  "pgwslideshow.js" %>
+  <%= stylesheet_link_tag 'pgwslideshow_light.css' %>
+<% end %>
+
+<script type="text/javascript">
+  $(window).load(function() {
+      $('.pgwSlideshow').pgwSlideshow({
+        autoSlide: true,
+        transitionEffect: 'fading',
+        intervalDuration: 100000,
+        mainClassName: 'pgwSlideshowLight'
+      });
+      $('.ps-current a').addClass("fancybox");
+      $('.ps-current a').attr("rel", "gallery1");
+      $(".fancybox").fancybox();
+  });
+
+</script>
+
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr"><%= @product.name.titleize %></div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to @category.name.titleize, products_path(@category.permalink) %></li>
+        <li class="active"><%= @product.name.titleize %></li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <div class="col-xs-12 col-sm-5 product-detail-images">
+    <ul class="pgwSlideshow no-padding-lr">
+      <%# images = @product.product_images %>
+      <% @product_images.each do |product_image| %>
+        <li>
+          <%= link_to  (image_tag product_image.image.url(:medium),
+                       :alt => "@product.name.humanize"),
+                       "#" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-xs-12 col-sm-7 product-detail-info">
+    <div class="product-detail-name"><%= @product.name.titleize %></div>
+    <div class="product-detail-sku"><%= @product.sku.titleize %></div>
+    <div class="product-detail-short-description">
+      <%= raw @product.short_specification %>
+    </div>
+  </div>
+  <div class="col-xs-12 product-detail-specification">
+    <div class="panel with-nav-tabs panel-default">
+      <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#specification" data-toggle="tab">Specification</a></li>
+            <li><a href="#certification" data-toggle="tab">Certification</a></li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="specification">
+            <%= raw @product.specification %>
+          </div>
+          <div class="tab-pane fade" id="certification"><%= raw @product.certificate %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 product-detail-related-product">
+    <h4>Related Product</h4>
+    <div class="relared-products">
+      <% (0..3).each do |x| %>
+        <div class="col-xs-6 col-md-3 product">
+            <div class="product-image">
+              <%= link_to (image_tag "product1.jpg", :class => "img-responsive first-img"), product_detail_path %>
+              <%= link_to (image_tag "product2.jpg", :class => "img-responsive second-img"), product_detail_path %>
+            </div>
+            <div class="product-name">
+              1111
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

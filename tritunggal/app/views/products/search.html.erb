@@ -1,0 +1,138 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "jstree" %>
+  <%= stylesheet_link_tag  "jstree" %>
+<% end %>
+
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Search Result '<%= params[:keyword] %>'</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <% unless Category.first.nil? %>
+          <li><%= link_to "Products", products_path(Category.first.permalink) %></li>
+        <% end %>
+        <li class="active">Search</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <div class="hidden-xs col-sm-3 categories-box no-padding-lr">
+    <div class="col-xs-12 no-padding-lr categories-box-title">
+      <h3 class="col-sm-10 no-padding-lr">Categories</h3>
+      <%#*<div class="col-sm-2">%>
+        <%#*<span class="toggle " id="p_cat"><i class="fa fa-caret-down" aria-hidden="true"></i></span>%>
+      <%#*</div>%>
+    </div>
+    <div class="col-xs-12 no-padding-lr categories-box-content" id="category-tree">
+      <ul>
+        <% @categories.each do |cat| %>
+          <% if cat.child_categories.blank? %>
+            <li data-jstree='{"icon":"fa fa-file-o"}'>
+              <%= link_to cat.name.titleize, products_path(cat.permalink) %>
+            </li>
+          <% else %>
+            <li><%= link_to cat.name.titleize, "javascript:void(0)" %>
+              <ul>
+                <% cat.child_categories.each do |child| %>
+                  <% if child.child_categories.blank? %>
+                    <li data-jstree='{"icon":"fa fa-file-o"}'>
+                      <%= link_to child.name.titleize, products_path(child.permalink) %>
+                    </li>
+                  <% else %>
+                    <li><%= link_to child.name.titleize, "javascript:void(0)" %>
+                      <ul>
+                        <% child.child_categories.each do |gs_child| %>
+                          <li data-jstree='{"icon":"fa fa-file-o"}'>
+                            <%= link_to gs_child.name.titleize, products_path(gs_child.permalink) %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-sm-9 p-l-30">
+    <div class="col-sm-12 product-search">
+      <div class="col-sm-8 no-padding-l">
+        <%= form_tag product_search_path, :method => :get do %>
+        <div class="input-group">
+          <%= text_field_tag :keyword, params[:keyword], :class => "form-control", :placeholder => "Search for..." %>
+          <span class="input-group-btn">
+            <%= submit_tag "Search", :class => "btn btn-default" %>
+          </span>
+        </div>
+        <% end %>
+      </div><!-- /.col-lg-6 -->
+    </div>
+    <% @products.each do |product| %>
+      <div class="col-xs-6 col-md-4 product">
+          <div class="product-image">
+            <% product.product_images.sample(2).each_with_index do |img, x| %>
+            <% style = x%2 == 0 ? 'first-img' : 'second-img' %>
+            <%= link_to (image_tag img.image.url(:medium), :class => "img-responsive #{style}"),
+                        product_detail_path(:cat_permalink => product.category.permalink,
+                                            :prod_permalink => product.permalink) %>
+            <% end %>
+          </div>
+          <div class="product-name">
+            <%= product.name.titleize %>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#category-tree').jstree().bind("select_node.jstree", function (e, data) {
+         var href = data.node.a_attr.href;
+         document.location.href = href;
+      });
+      $('#category-tree').on('click', '.jstree-anchor', function (e) {
+        $('#category-tree').jstree(true).toggle_node(e.target);
+      });
+      $("span#p_cat").click(function() {
+        if($("ul.product-categories").hasClass( "active" )){
+          $("ul.product-categories").removeClass( "active" )
+          $(".categories-box > h3").css( "border-radius", "6px" );
+          $(".categories-box > h3 i").removeClass( "fa-caret-down" );
+          $(".categories-box > h3 i").addClass( "fa-caret-up" );
+          $("ul.product-categories").slideUp("fast");
+        }else{
+          $("ul.product-categories").addClass( "active" )
+          $(".categories-box > h3").css( "border-radius", "6px 0px" );
+          $(".categories-box > h3 i").removeClass( "fa-caret-up" );
+          $(".categories-box > h3 i").addClass( "fa-caret-down" );
+          $("ul.product-categories").slideDown("fast");
+        }
+      })
+      $("span.toggle-child-cat").click(function() {
+        if($(this).parent().next().hasClass( "active" )){
+          $(this).parent().next().removeClass( "active" )
+          $(this).parent().next().slideUp("fast");
+          $(this).children().removeClass( "fa-minus" );
+          $(this).children().addClass( "fa-plus" );
+        }else{
+          $("ul.child-cat").slideUp("fast");
+          $("ul.child-cat").removeClass( "active" )
+          $(".toggle-child-cat i").removeClass( "fa-minus" );
+          $(".toggle-child-cat i").addClass( "fa-plus" );
+          $(this).parent().next().addClass( "active" )
+          $(this).parent().next().slideDown("fast");
+          $(this).children().removeClass( "fa-plus" );
+          $(this).children().addClass( "fa-minus" );
+        }
+      })
+    })
+
+</script>

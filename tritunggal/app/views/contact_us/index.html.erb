@@ -1,0 +1,105 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Contact Us</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <li class="active">Contact us</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="map" id="map"></div>
+  <script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -6.921448, lng: 107.612211},
+        mapTypeControl: false,
+        zoom: 16,
+        scrollwheel: false,
+        styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
+      });
+      var marker = new google.maps.Marker({
+        map: map,
+        position: {lat: -6.921448, lng: 107.612211},
+        title: 'PT Tritunggal Swarna'
+      });
+
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnNJ6kkXnA5of0MVsW36r0meDM0schA4A&callback=initMap" async defer></script>
+  
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <div class="col-xs-12 col-sm-6 contact-us">
+    <h2><strong>Contact</strong> Us</h2>
+    <%= form_for @contact, :url => contact_us_path do |f| %>
+      <% if @contact.errors.any? %>
+        <div class="error_explanation">
+          <h2><%= pluralize(@contact.errors.count, "error") %> prevented this record from being saved:</h2>
+          <ul>
+            <% @contact.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="col-xs-12 col-sm-6 form-group">
+        <%= f.label :name, "Name *" %>
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
+      <div class="col-xs-12 col-sm-6 form-group">
+        <%= f.label :email, "Email *" %>
+        <%= f.email_field :email, :class => "form-control" %>
+      </div>
+      <div class="col-xs-12 form-group">
+        <%= f.label :subject, "Subject *" %>
+        <%= f.text_field :subject, :class => "form-control" %>
+      </div>
+      <div class="col-xs-12 form-group">
+        <%= f.label :content, "Message *" %>
+        <%= f.text_area :content, :class => "form-control", :rows => 10 %>
+      </div>
+      <div class="col-xs-12 form-group">
+        <%= recaptcha_tags %>
+      </div>
+      <div class="col-xs-12 form-group">
+        <%= f.submit "Send Message", :class => "btn btn-info", :style=>"background-color:#51bf9f" %>
+      </div>
+      <div class="col-xs-12 form-group m-t-30">
+        <b>* Marked fields are mandatory</b>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-sm-6 no-padding-lr">
+    <div class="col-xs-12 location">
+      <h3>The <b>Office</b></h3>
+      <span class="col-xs-12 address">
+        <i class="fa fa-map-marker col-xs-3 col-sm-2 no-padding-lr" aria-hidden="true"></i>
+        <div class="col-xs-9 col-sm-9 no-padding-lr">
+          <b>Address:</b> Tamblong No 2, Bandung, Jawa Barat, Indonesia
+        </div>
+      </span>
+      <span class="col-xs-12 phone">
+        <i class="fa fa-phone col-xs-3 col-sm-2 no-padding-lr" aria-hidden="true"></i>
+        <div class="col-xs-10 col-sm-9 info"><b>Phone:</b> (022) 1234-123</div>
+      </span>
+      <span class="col-xs-12 email">
+        <i class="fa fa-envelope col-xs-3 col-sm-2 no-padding-lr" aria-hidden="true"></i>
+        <div class="col-xs-10 col-sm-9 info"><b>Email:</b> sales@tritunggalswarna.co.id</div>
+      </span>
+    </div>
+    <div class="col-xs-12 office-time">
+      <h3><b>Business</b> Hours</h3>
+      <span class="col-xs-12">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        Monday - Friday 8am to 5pm
+      </span>
+      <span class="col-xs-12">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        Saturday and Sunday - Closed
+      </span>
+    </div>
+  </div>
+</div>

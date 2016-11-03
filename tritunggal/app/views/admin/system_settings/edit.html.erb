@@ -1,0 +1,35 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/ckeditor/ckeditor" %>
+<% end %>
+
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Edit <%= params[:id].humanize.titleize %></div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li class="active">Edit <%= params[:id].humanize.titleize %></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <%= form_for(@system_setting, :url => admin_system_setting_path(@system_setting.permalink),
+               :html => { :multipart => true,  :class => "form-horizontal"}) do |f| %>
+    <div class="form-group">
+      <%= f.label :value, "Value *", :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.cktext_area :value, :class => "form-control",
+                          :ckeditor => {:uiColor => "#f0e5d2", :toolbar => "Basic"}%>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2">&nbsp;</div>
+      <div class="col-sm-10">
+        <%= f.submit :class => "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>

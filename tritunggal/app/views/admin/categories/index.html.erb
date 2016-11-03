@@ -1,0 +1,45 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Categories</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li class="active">Categories</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <p><%= link_to "Add new category", new_admin_category_path %></p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Parent</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each_with_index do |category, x| %>
+        <tr>
+          <th scope="row"><%= @no+x+1 %></th>
+          <td><%= category.name %></td>
+          <td><%= category.try(:parent_category).try(:name) %></td>
+          <td>
+            <% unless category.is_grandchild? %>
+              <%= link_to "Add Child", new_admin_category_path(:id => category.id), :class => "btn btn-info" %>
+            <% end %>
+            <%= link_to "Edit", edit_admin_category_path(category), :class => "btn btn-success" %>
+            <%= link_to "Delete", admin_category_path(category.id ), :method => :delete,
+                                  data: {:confirm => "Are you sure?"}, :class => "btn btn-warning" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="col-xs-12 no_padding_lr pagination"><%= paginate @categories %></div>
+</div>

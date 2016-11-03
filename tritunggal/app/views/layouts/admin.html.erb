@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Tritunggal</title>
+  <%= stylesheet_link_tag    'application', 'admin' %>
+  <%= javascript_include_tag 'application' %>
+  <%= yield :javascript_includes %>
+  <%= yield :css_includes %>
+  <!--[if lt IE 9]>
+    <script src="/assets/html5shiv.js"></script>
+    <script src="/assets/respond.min.js"></script>
+  <![endif]-->
+  <%= csrf_meta_tags %>
+</head>
+<body id="home" class="admin">
+  <nav class="navbar navbar-default navbar-fixed">
+    <div class="col-sm-12 user-info-bar">
+      <div class="col-md-6 hidden-xs">&nbsp;</div>
+      <div class="col-md-6 hidden-xs" id="login-pan">
+        <%= raw welcome_text %>
+      </div>
+    </div>
+    <div class="container">
+      <div class='hidden-xs col-sm-4 col-md-4 col-lg-4 bounce_in_left'>
+        <%= link_to image_tag("logo.png", :alt => "Logo" , :class => "img-responsive"),
+                    root_path %>
+      </div>
+      <div class="hidden-xs col-sm-8 col-md-8 col-lg-8">
+        <ul role="menu" class="nav navbar-nav navbar-fadeIn">
+          <li class="nav-item"><%= link_to "Home", root_path %></li>
+          <li class="nav-item"><%= link_to "Categories", admin_categories_path %></li>
+          <li class="nav-item"><%= link_to "Products", admin_products_path %></li>
+          <li class="nav-item"><%= link_to "Certificates", admin_certificates_path %></li>
+          <li class="nav-item"><%= link_to "Contact Us", admin_contact_us_list_path %></li>
+          <li class="nav-item dropdown">
+            <%= link_to "Settings", "javascript:void(0)" %>
+            <ul role="menu" class="dropdown-menu">
+              <li class="nav-item"><%= link_to "About Us", edit_admin_system_setting_path("about-us") %></li>
+              <li class="nav-item"><%= link_to "Banner", admin_banners_path %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="section" class="admin with-user-bar">
+    <%= yield %>
+  </section>
+
+  <footer id="footer-menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <%= link_to (image_tag 'distrupt-logo-light_002.png', :alt => "Distrupt logo dark"), "#",
+                          :class => "footer-brand col-xs-12 " %>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <ul class="list-unstyled ct-menu-footer col-xs-12">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Categories", admin_categories_path %></li>
+            <li><%= link_to "Products", admin_products_path %></li>
+            <li><%= link_to "Certificates", admin_certificates_path %></li>
+            <li><%= link_to "Contact Us", admin_contact_us_list_path %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <footer id="footer-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          &copy; 2016 PT Tritunggal Swarna
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Menu //-->
+  <div class="ct-menu-mobile">
+    <nav class="navbar navbar-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 hidden-xs">
+            <ul class="list-unstyled list-inline ct-socials--rounded">
+              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-xs-7 col-sm-4">
+            <div class="navbar-header">
+              <%= link_to (image_tag 'distrupt-logo-light_002.png', :alt => "Distrupt logo dark"), "#",
+                          :class => "navbar-brand" %>
+            </div>
+          </div>
+          <div class="col-xs-5 col-sm-4">
+            <ul role="menu" class="nav navbar-nav">
+              <li class="ct-productCart-link"><a><i class="fa fa-shopping-cart"></i></a>
+              </li>
+              <li class="nav-item-toggle"><a><i class="fa fa-bars"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="navbar-beacon">
+    <ul class="list-unstyled">
+      <li class="nav-item"><%= link_to "Home", root_path %></li>
+      <li class="nav-item"><%= link_to "Categories", admin_categories_path %></li>
+      <li class="nav-item"><%= link_to "Products", admin_products_path %></li>
+      <li class="nav-item"><%= link_to "Certificates", admin_certificates_path %></li>
+      <li class="nav-item"><%= link_to "Contact Us", admin_contact_us_list_path %></li>
+      <li class="nav-item dropdown">
+        <%= link_to "Settings<i class='fa fa-angle-double-down'></i>", "javascript:void(0)" %>
+        <ul role="menu" class="dropdown-menu">
+          <li class="nav-item"><%= link_to "About Us", admin_banners_path %></li>
+          <li class="nav-item"><%= link_to "Banner", admin_banners_path %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

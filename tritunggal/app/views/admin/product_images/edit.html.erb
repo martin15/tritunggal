@@ -1,0 +1,63 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Edit Product Images</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li><%= link_to "Products", admin_products_path %></li>
+        <li><%= link_to "Product Images", admin_product_images_path(@product.id) %></li>
+        <li class="active">Edit Product Images</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container product-image">
+  <%= render :partial => "shared/flash" %>
+  <% if @product_image.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" group="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <h4><%= pluralize(@product_image.errors.count, "error") %> prohibited this group from being saved:</h4>
+      <ul>
+      <% @product_image.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_for([:admin, @product_image], 
+               :url => admin_product_image_path(:id => @product.id, :product_image_id => @product_image.id),
+               :html => { :multipart => true,  :class => "form-horizontal"}) do |f| %>
+    <div class="form-group">
+      <div class="col-sm-3">
+        <%= image_tag @product_image.image.url(:medium), :class => "img-responsive" %>
+      </div>
+      <div class="col-sm-9">
+        <%= f.label :image, "New Image *", :class => "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= f.file_field :image, :class => "p-t-10" %>
+        </div>
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-3 m-t-10">
+          <%= f.submit :class => "btn btn-success" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <h3>List Product Image</h3>
+  <% @product_images.each do |img| %>
+    <div class="col-sm-3">
+      <div class="product-image-box">
+        <%= image_tag img.image.url(:medium), :class => "img-responsive" %>
+        <%= link_to "Edit", edit_admin_product_image_path(:id => @product.id, :product_image_id => img.id),
+                            :class => "left" %>
+        <%= link_to "Delete", admin_product_image_path(:id => @product.id, :product_image_id => img.id),
+                            :class => "right", :method => :delete, :data => {:confirm => "Are you sure?"} %>
+      </div>
+    </div>
+  <% end %>
+</div>

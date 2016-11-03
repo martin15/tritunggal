@@ -1,0 +1,52 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-7 name no-padding-lr"><%= @category.name.titleize %> Products</div>
+    <div class="col-xs-12 col-sm-5 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li><%= link_to "Products", admin_products_path %></li>
+        <li class="active"><%= @category.name.titleize %></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <p><%= link_to "Add new product", new_admin_product_path %></p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Image</th>
+        <th class="green-link"><%= sortable("name", "Name") %></th>
+        <th class="green-link"><%= sortable("sku", "SKU") %></th>
+        <th>Categories</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each_with_index do |product, x| %>
+        <tr>
+          <th><%= @no+x+1 %></th>
+          <td><%= image_tag product.display_image.try(:image).try(:url, :thumb) %></td>
+          <td><%= product.name %></td>
+          <td><%= product.sku %></td>
+          <td>
+            <% product.categories.each do |cat| %>
+              <%= link_to cat.name, admin_products_by_category_path(cat.permalink) %><br />
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "Product Images", admin_product_images_path(product), :class => "btn btn-info" %>
+            <%= link_to "Edit", edit_admin_product_path(product), :class => "btn btn-success" %>
+            <%= link_to "Delete", admin_product_path(product.id ), :method => :delete,
+                                  :data => {:confirm => "Are you sure?"}, :class => "btn btn-warning" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="col-xs-12 no_padding_lr pagination"><%= paginate @products %></div>
+</div>

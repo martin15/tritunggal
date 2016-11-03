@@ -1,0 +1,28 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Contact Us Detail</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li><%= link_to "Contact Us", admin_contact_us_list_path %></li>
+        <li class="active">Contact Us Detail</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="col-xs-12 col-sm-2 m-b-10"><b>Name : </b></div>
+  <div class="col-xs-12 col-sm-9 m-b-10"><%= @contact_us.name %></div>
+  <div class="col-xs-12 col-sm-2 m-b-10"><b>Email :</b></div>
+  <div class="col-xs-12 col-sm-9 m-b-10"><%= @contact_us.email %></div>
+  <div class="col-xs-12 col-sm-2 m-b-10"><b>Subject :</b></div>
+  <div class="col-xs-12 col-sm-9 m-b-10"><%= @contact_us.subject %></div>
+  <div class="col-xs-12 m-b-10"><b>Content</b></div>
+  <div class="col-xs-12 m-b-30"><%= raw(@contact_us.content) %></div>
+  <div class="col-xs-12">
+    <%= link_to "Back", admin_contact_us_list_path, :class => "btn btn-success" %>
+    <%= link_to "Delete", admin_delete_contact_us_path(@contact_us.id ), :method => :delete,
+                                  :data => {:confirm => "Are you sure?"}, :class => "btn btn-warning" %>
+  </div>
+</div>

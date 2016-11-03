@@ -1,0 +1,147 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/ckeditor/ckeditor" %>
+<% end %>
+
+<% if @product.errors.any? %>
+  <div class="alert alert-danger alert-dismissable" group="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4><%= pluralize(@product.errors.count, "error") %> prohibited this group from being saved:</h4>
+    <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="col-sm-8">
+  <div class="form-group">
+    <%= f.label :name, "Name *", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, :class => "form-control" %>
+      <%= hidden_field_tag "id", params[:id] %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :sku, "SKU *", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :sku, :class => "form-control" %>
+    </div>
+  </div>
+  <%= f.fields_for :post_attachments do |p| %>
+    <div class="form-group">
+      <%= f.label :image, "Images *", :class => "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <% if action_name == 'edit' || action_name == 'update' %>
+          Click 
+          <%= link_to "here", admin_product_images_path(@product), :class => "green-link" %>
+          to manage Product Images
+        <% else %>
+          <%= p.file_field :image, :multiple => true, :name => "product_images[image][]" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :short_specification, "Short Spec *", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :short_specification, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :specification, "Specification *", :class => "col-sm-2 control-label no-padding-l" %>
+    <div class="col-sm-10">
+      <%= f.cktext_area :specification, :class => "form-control",
+                        :ckeditor => {:uiColor => "#f0e5d2", :toolbar => "Basic"}%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :certificate, "Certificate *", :class => "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.cktext_area :certificate, :class => "form-control",
+                        :ckeditor => {:uiColor => "#f0e5d2", :toolbar => "Basic"}%>
+    </div>
+  </div>
+</div>
+<div class="col-sm-4">
+  <h4>List Category</h4>
+  <ul class="list-categories active">
+    <% @p_categories.each do |cat| %>
+      <li class="cat-item">
+        <% if cat.child_categories.blank? %>
+          <div class="checkbox">
+            <label>
+              <%= check_box_tag "category_ids[]", cat.id, @product_categories.include?(cat.id) %>
+              <%= cat.name %>
+            </label>
+          </div>
+        <% else %>
+          <%= cat.name %>
+          <ul class="list-child-category">
+          <% cat.child_categories.each do |child| %>
+            <li>
+              <% if child.child_categories.blank? %>
+                <div class="checkbox">
+                  <label>
+                    <%= check_box_tag "category_ids[]", child.id,
+                                      @product_categories.include?(child.id) %>
+                    <%= child.name %>
+                  </label>
+                </div>
+              <% else %>
+                <%= child.name %>
+                <ul class="list-child-category">
+                <% child.child_categories.each do |gs_child| %>
+                  <li>
+                    <div class="checkbox">
+                      <label>
+                        <%= check_box_tag "category_ids[]", gs_child.id,
+                                          @product_categories.include?(gs_child.id) %>
+                        <%= gs_child.name %>
+                      </label>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <% end %>
+
+        <%# if cat.last_child? %>
+          <%#*<div class="checkbox">%>
+            <%#*<label>%>
+              <%#= check_box_tag "category_ids[]", cat.id, @product_categories.include?(cat.id) %>
+              <%#= cat.name %>
+            <%#*</label>%>
+          <%#*</div>%>
+        <%# else %>
+          <%#= cat.name %>
+        <%# end %>
+        <%#*<ul class="list-child-category">%>
+          <%# cat.child_categories.each do |child| %>
+            <%#*<li>%>
+              <%# if child.last_child? %>
+                <%#*<div class="checkbox">%>
+                  <%#*<label>%>
+                    <%#= check_box_tag "category_ids[]", child.id,
+                                      @product_categories.include?(child.id) %>
+                    <%#= child.name %>
+                  <%#*</label>%>
+                <%#*</div>%>
+              <%# else %>
+                <%#= child.name %>
+              <%# end %>
+            <%#*</li>%>
+          <%# end %>
+        <%#*</ul>%>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+
