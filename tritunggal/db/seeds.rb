@@ -16,3 +16,6 @@ if user.nil?
                              :first_name => "Martin", :last_name => "Martin",
                              :confirmed_at => Time.now)
 end
+
+category = Category.find_or_create_by(:name => "Panel")
+puts category.inspect
