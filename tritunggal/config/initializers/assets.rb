@@ -12,5 +12,5 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(
   font-awesome.css bootstrap.css owl.carousel.css owl.transitions.css pgwslideshow_light.css
   admin.css jstree.css
-  disrupt.js owl.carousel.min.js pgwslideshow.js jstree.js
+  disrupt.js owl.carousel.min.js pgwslideshow.js jstree.js  *.svg *.eot *.woff *.ttf *.woff2 *.otf
 )
