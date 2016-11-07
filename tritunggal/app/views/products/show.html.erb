@@ -37,7 +37,7 @@
       <%# images = @product.product_images %>
       <% @product_images.each do |product_image| %>
         <li>
-          <%= link_to (image_tag product_image.image.url(:large),
+          <%= link_to (image_tag product_image.image.url(:medium),
                        :alt => " "),
                        "#" %>
         </li>
