@@ -101,7 +101,7 @@
   </div>
   <div class="col-sm-9 p-l-30">
     <div class="col-xs-12 product-search">
-      <div class="col-xs-7 no-padding-l">
+      <div class="col-sm-12 col-sm-7 no-padding-l m-b-10">
         <%= form_tag product_search_path, :method => :get do %>
         <div class="input-group">
           <%= text_field_tag :keyword, params[:keyword], :class => "form-control", :placeholder => "Search for..." %>
@@ -111,7 +111,7 @@
         </div>
         <% end %>
       </div>
-      <div class="col-xs-5 no-padding-l products-order">
+      <div class="col-sm-12 col-sm-5 no-padding-l products-order">
         <%= select_tag "order_by", options_for_select(order_item, params[:order_by]),
                      :onchange => "update_list_product('#{@category.permalink}',this);" %>
       </div>

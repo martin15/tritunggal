@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
   <title>Tritunggal</title>
   <%= stylesheet_link_tag    'application' %>
   <%= javascript_include_tag 'application', 'owl.carousel.min.js' %>
@@ -13,6 +18,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body id="home">
+  <script>
+    //alert($( window ).width());
+  </script>
   <nav class="navbar navbar-default navbar-fixed <%= manage_menu %>">
     <% unless current_user.nil? %>
       <div class="col-sm-12 user-info-bar">
@@ -80,18 +88,19 @@
   <footer id="footer-menu">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-4">
-          <%= link_to (image_tag 'logo.png', :alt => "Distrupt logo dark"), "#",
-                          :class => "footer-brand col-xs-12 " %>
+        <div class="col-xs-12 col-sm-4 footer-logo">
+          <%= link_to (image_tag 'logo-black.png', :alt => "Tritunggal Swarna", :class => "img-responsive"),
+                      root_path, :class => "footer-brand col-xs-12 " %>
         </div>
         <div class="col-xs-12 col-sm-8">
-          <ul class="list-unstyled ct-menu-footer col-xs-12">
+          <ul class="ct-menu-footer list-unstyled col-xs-12">
             <li><%= link_to "Home", root_path %></li>
             <li><%= link_to "Products", products_path(Category.try(:first_parent).try(:permalink)) %></li>
             <li><%= link_to "Certificates", certificates_path %></li>
             <li><%= link_to "About Us", about_us_path %></li>
             <li><%= link_to "Contact Us", contact_us_path %></li>
           </ul>
+
         </div>
       </div>
     </div>
@@ -119,16 +128,15 @@
               <li><a href="#"><i class="fa fa-instagram"></i></a></li>
             </ul>
           </div>
-          <div class="col-xs-7 col-sm-4">
+          <div class="col-xs-9 col-sm-4" style="padding: 15px">
             <div class="navbar-header">
-              <%= link_to (image_tag 'logo.png', :alt => "Distrupt logo dark"), "#",
-                          :class => "navbar-brand" %>
+              <%= link_to (image_tag 'logo-black.png', :alt => "Tritunggal Swarna",
+                                      :class => "img-responsive"),
+                          root_path, :class => "navbar-brand" %>
             </div>
           </div>
-          <div class="col-xs-5 col-sm-4">
-            <ul role="menu" class="nav navbar-nav">
-              <li class="ct-productCart-link"><a><i class="fa fa-shopping-cart"></i></a>
-              </li>
+          <div class="col-xs-3 col-sm-4" style="padding: 15px">
+            <ul role="menu" class="nav navbar-nav"  style="margin-top: 0">
               <li class="nav-item-toggle"><a><i class="fa fa-bars"></i></a></li>
             </ul>
           </div>
@@ -144,9 +152,36 @@
             <ul role="menu" class="dropdown-menu">
               <% @categories.each do |cat| %>
                 <% unless cat.child_categories.blank? %>
-                  <li class="nav-item">
-                    <%= link_to cat.name, products_path(cat.try(:first_child).try(:permalink)) %>
+                  <li class="nav-item dropdown">
+                    <%= link_to raw("#{cat.name}<i class='fa fa-angle-double-down'></i>"),
+                                "javascript:void(0)" %>
+                    <ul role="menu" class="dropdown-menu">
+                      <% cat.child_categories.each do |child_cat| %>
+                        <% unless child_cat.child_categories.blank? %>
+                          <li class="nav-item dropdown">
+                            <%= link_to raw("#{child_cat.name}<i class='fa fa-angle-double-down'></i>"),
+                                        "javascript:void(0)" %>
+                            <ul role="menu" class="dropdown-menu">
+                              <% child_cat.child_categories.each do |gs_child| %>
+                              <li class="nav-item">
+                                <%= link_to gs_child.name, products_path(gs_child.permalink) %>
+                              </li>
+                              <% end %>
+                            </ul>
+                          </li>
+                        <% else %>
+                          <li class="nav-item">
+                            <%= link_to child_cat.name, products_path(child_cat.permalink) %>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </ul>
                   </li>
+
+
+                  <%#*<li class="nav-item">%>
+                    <%#= link_to cat.name, products_path(cat.try(:first_child).try(:permalink)) %>
+                  <%#*</li>%>
                 <% else %>
                   <li class="nav-item"><%= link_to cat.name, products_path(cat.permalink) %></li>
                 <% end %>
