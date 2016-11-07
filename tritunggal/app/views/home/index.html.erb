@@ -121,7 +121,7 @@
       </div>/.item-->
       <% @banners.each do |banner| %>
         <div class="item">
-          <%= link_to (image_tag banner.image.url(:large), :class=> "img-responsive") %>
+          <%= link_to (image_tag banner.image.url, :class=> "img-responsive") %>
         </div>
         <%#= link_to raw("<div class='item' style='background-image: url(#{banner.image.url(:large)});'></div>") %>
       <% end %>
