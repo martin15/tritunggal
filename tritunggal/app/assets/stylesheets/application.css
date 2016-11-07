@@ -177,10 +177,11 @@ section > .page-header{
 }
 
 section > .page-header .name{
-  font-size: 36px;
+  font-size: 30px;
   padding: 20px 0;
   color: #fff;
   font-weight: 300;
+  font-family: "Montserrat",sans-serif;
 }
 section > .page-header div.breadcrumb{
   font-size: 12px;
@@ -1007,7 +1008,7 @@ footer#footer-info{
 }
 
 .ct-menu-footer li{
-  padding: 0 34px;
+  padding: 0 30px;
   float: left;
 }
 
@@ -1437,4 +1438,8 @@ footer#footer-info{
   background-color:#1fb7a6;
   z-index: 1;
   margin-bottom: 20px;
+}
+
+#specification table{
+  border: 1px solid #000;
 }

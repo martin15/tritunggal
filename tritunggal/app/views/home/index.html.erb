@@ -138,10 +138,10 @@
 
     </div>
     <div class="col-xs-12 no-padding-lr">
-      <% [["product.png", "Products", "bolt"],
-          ["certificates.png", "Certificates", "file-text-o"],
-          ["about-us.png", "About Us", "briefcase"],
-          ["contact-us.png", "Contact Us", "map"]].each do |arr| %>
+      <% [["product.png", "Products", "bolt", "/products"],
+          ["certificates.png", "Certificates", "file-text-o", "/certificates"],
+          ["about-us.png", "About Us", "briefcase", "/about_us"],
+          ["contact-us.png", "Contact Us", "map", "/contact_us"]].each do |arr| %>
         <div class="col-xs-6 col-sm-3 no-padding-lr" style="font-size:12px;">
           <div class="ct-imageBox"  style="float:left">
             <%= image_tag arr[0], :class => "img-responsive", :alt => "About us image" %>
@@ -151,7 +151,7 @@
                   <div class="ct-imageBox-icon">
                     <i class="fa fa-<%= arr[2] %>"></i>
                   </div>
-                  <%= link_to raw("#{arr[1]}<i class='fa fa-caret-right'></i>"), "#",
+                  <%= link_to raw("#{arr[1]}<i class='fa fa-caret-right'></i>"), arr[3],
                               :class => "btn btn-transparent btn-withIcon btn-motiveColor"  %>
                 </div>
               </div>

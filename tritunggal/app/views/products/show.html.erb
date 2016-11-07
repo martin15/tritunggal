@@ -20,32 +20,32 @@
 
 <div class="page-header">
   <div class="container">
-    <div class="col-xs-12 col-sm-4 name no-padding-lr"><%= @product.name.titleize %></div>
-    <div class="col-xs-12 col-sm-8 breadcrumb">
+    <div class="col-xs-12 col-sm-6 name no-padding-lr"><%= @product.name %></div>
+    <div class="col-xs-12 col-sm-6 breadcrumb">
       <ol class="breadcrumb">
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to @category.name.titleize, products_path(@category.permalink) %></li>
-        <li class="active"><%= @product.name.titleize %></li>
+        <li class="active"><%= @product.name %></li>
       </ol>
     </div>
   </div>
 </div>
 <div class="container">
   <%= render :partial => "shared/flash" %>
-  <div class="col-xs-12 col-sm-5 product-detail-images">
+  <div class="col-xs-12 col-sm-6 product-detail-images">
     <ul class="pgwSlideshow no-padding-lr">
       <%# images = @product.product_images %>
       <% @product_images.each do |product_image| %>
         <li>
-          <%= link_to  (image_tag product_image.image.url(:medium),
-                       :alt => "@product.name.humanize"),
+          <%= link_to (image_tag product_image.image.url(:large),
+                       :alt => " "),
                        "#" %>
         </li>
       <% end %>
     </ul>
   </div>
-  <div class="col-xs-12 col-sm-7 product-detail-info">
-    <div class="product-detail-name"><%= @product.name.titleize %></div>
+  <div class="col-xs-12 col-sm-6 product-detail-info">
+    <div class="product-detail-name"><%= @product.name %></div>
     <div class="product-detail-sku"><%= @product.sku.titleize %></div>
     <div class="product-detail-short-description">
       <%= raw @product.short_specification %>
