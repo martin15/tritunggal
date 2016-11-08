@@ -1123,7 +1123,7 @@ footer#footer-info{
 
 .categories-box-content > ul, .categories-box-content ul.child-cat{
   list-style: outside none none;
-  padding: 10px;
+/*  padding: 10px;*/
   font-size: 13px;
 }
 
@@ -1443,3 +1443,90 @@ footer#footer-info{
 #specification table{
   border: 1px solid #000;
 }
+
+.ps-caption{
+  display: none!important;
+}
+
+ul#parent > li{
+  border-bottom: 1px solid #eee;
+}
+
+ul#parent > li:last-child{
+  border-bottom: none;
+}
+
+ul#parent > li ul{
+  display: none;
+}
+
+label.nav-header, ul#parent > li > a {
+  width: 100%;
+  font-weight: bold;
+}
+
+label.nav-header:hover{
+  background-color: #eee;
+}
+
+label.nav-header i{
+  width: 17px;
+  height: 17px;
+  line-height: 15px;
+  background: #0088cc none repeat scroll 0 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  bottom: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin: auto;
+  padding: 0 0 5px;
+  text-align: center;
+  transition: all 0.25s ease 0s;
+  float: right;
+}
+
+ul#parent > li > label, ul#parent > li > a {
+  background: #ccc none repeat scroll 0 0;
+  padding: 15px 10px;
+  cursor: pointer;
+  margin: 0;
+}
+
+ul#parent > li:first-child > label{
+/*  padding-top: 30px;*/
+}
+
+ul#parent > li:last-child > label{
+  padding-bottom: 10px;
+}
+
+ul.tree{
+/*  padding: 5px;*/
+}
+
+ul.tree > li > a{
+  display: block;
+  padding: 5px 20px;
+  position: relative;
+  margin: 0px;
+  cursor: pointer;
+}
+
+ul.tree > li > label{
+  display: block;
+  padding: 5px 5px 5px 20px;
+  position: relative;
+  margin: 0px;
+  cursor: pointer;
+}
+
+ul.gs-child{
+  padding: 0px 20px;
+}
+
+ul.tree li img{
+  margin-right: 5px;
+}
+

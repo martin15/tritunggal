@@ -24,40 +24,6 @@
       <%#*</div>%>
     </div>
     <div class="col-xs-12 no-padding-lr categories-box-content" id="category-tree">
-      <ul>
-        <% @categories.each do |cat| %>
-          <% selected = ',"selected":true' if cat.id == @category.id %>
-          <% if cat.child_categories.blank? %>
-            <li data-jstree='{"icon":"fa fa-file-o"<%= selected %>}'>
-              <%= link_to cat.name.titleize, products_path(cat.permalink) %>
-            </li>
-          <% else %>
-            <li><%= link_to cat.name.titleize, "javascript:void(0)" %>
-              <ul>
-                <% cat.child_categories.each do |child| %>
-                  <% child_selected = ',"selected":true' if child.id == @category.id %>
-                  <% if child.child_categories.blank? %>
-                    <li data-jstree='{"icon":"fa fa-file-o"<%= child_selected %>}'>
-                      <%= link_to child.name.titleize, products_path(child.permalink) %>
-                    </li>
-                  <% else %>
-                    <li><%= link_to child.name.titleize, "javascript:void(0)" %>
-                      <ul>
-                        <% child.child_categories.each do |gs_child| %>
-                          <% gs_selected = ',"selected":true' if gs_child.id == @category.id %>
-                          <li data-jstree='{"icon":"fa fa-file-o"<%= gs_selected %>}'>
-                            <%= link_to gs_child.name.titleize, products_path(gs_child.permalink) %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
       <!--
       <%#*<ul class="product-categories active">%>
         <%# @categories.each do |cat| %>
@@ -97,6 +63,44 @@
         <%# end %>
       </ul>
       !-->
+
+
+
+      <ul class="nav nav-list" id="parent">
+        <% @categories.each do |cat| %>
+          <li>
+            <% if cat.child_categories.blank? %>
+              <%= link_to cat.name.titleize, products_path(cat.permalink) %>
+            <% else %>
+              <label class="tree-toggler nav-header"><%= cat.name.titleize %></label>
+              <% cat.child_categories.each do |child| %>
+                <ul class="nav nav-list tree son">
+                  <li>
+                    <% if child.child_categories.blank? %>
+                      <%= link_to raw("#{image_tag 'blue_arrow.png'} #{child.name}"),
+                                  products_path(child.permalink) %>
+                    <% else %>
+                      <label class="tree-toggler nav-header label-for-child">
+                        <%= image_tag 'blue_arrow.png' %>
+                        <%= child.name.titleize %>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                      </label>
+                      <% child.child_categories.each do |gs_child| %>
+                        <ul class="nav nav-list tree gs-child">
+                          <li>
+                            <%= link_to raw("#{image_tag 'green_arrow.png'} #{gs_child.name}"),
+                                          products_path(gs_child.permalink) %>
+                          </li>
+                        </ul>
+                      <% end %>
+                    <% end %>
+                  </li>
+                </ul>
+              <% end %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
   <div class="col-sm-9 p-l-30">
@@ -136,13 +140,25 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-      $('#category-tree').jstree().bind("select_node.jstree", function (e, data) {
-         var href = data.node.a_attr.href;
-         document.location.href = href;
+
+      $('label.tree-toggler').click(function () {
+        //$("ul#parent > li > ul.son").hide();
+
+        $(this).parent().children('ul.tree').toggle(300, function() {
+          $('.gs-child').each(function() {
+            var $this = $(this);
+            if($(this).is(":visible")){
+              $(this).parents().find('i').removeClass( "fa-plus" );
+              $(this).parents().find('i').addClass( "fa-minus" );
+            }else{
+              $(this).parents().find('i').removeClass( "fa-minus" );
+              $(this).parents().find('i').addClass( "fa-plus" );
+            }
+          });
+        });
+
       });
-      $('#category-tree').on('click', '.jstree-anchor', function (e) {
-        $('#category-tree').jstree(true).toggle_node(e.target);
-      });
+
       $("span#p_cat").click(function() {
         if($("ul.product-categories").hasClass( "active" )){
           $("ul.product-categories").removeClass( "active" )
