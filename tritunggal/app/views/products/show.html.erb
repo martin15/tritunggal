@@ -48,7 +48,7 @@
     <div class="product-detail-name"><%= @product.name %></div>
     <div class="product-detail-sku"><%= @product.sku.titleize %></div>
     <div class="product-detail-short-description">
-      <%= raw @product.short_specification %>
+      <%= raw simple_format(@product.short_specification) %>
     </div>
   </div>
   <div class="col-xs-12 product-detail-specification">
@@ -64,7 +64,7 @@
           <div class="tab-pane fade in active" id="specification">
             <%= raw @product.specification %>
           </div>
-          <div class="tab-pane fade" id="certification"><%= raw @product.certificate %></div>
+          <div class="tab-pane fade" id="certification"><%#= raw @product.certificate %></div>
         </div>
       </div>
     </div>

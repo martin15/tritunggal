@@ -5,11 +5,11 @@
 
 <div class="page-header">
   <div class="container">
-    <div class="col-xs-12 col-sm-4 name no-padding-lr"><%= @category.name.titleize %></div>
-    <div class="col-xs-12 col-sm-8 breadcrumb">
+    <div class="col-xs-12 col-sm-6 name no-padding-lr"><%= @category.name %></div>
+    <div class="col-xs-12 col-sm-6 breadcrumb">
       <ol class="breadcrumb">
         <li><%= link_to "Home", root_path %></li>
-        <li class="active"><%= @category.name.titleize %></li>
+        <li class="active"><%= @category.name %></li>
       </ol>
     </div>
   </div>
@@ -72,15 +72,18 @@
             <% if cat.child_categories.blank? %>
               <%= link_to cat.name.titleize, products_path(cat.permalink) %>
             <% else %>
-              <label class="tree-toggler nav-header"><%= cat.name.titleize %></label>
+              <label class="tree-toggler nav-header">
+                <%= cat.name.titleize %>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </label>
               <% cat.child_categories.each do |child| %>
-                <ul class="nav nav-list tree son">
+                <ul class="nav nav-list tree child">
                   <li>
                     <% if child.child_categories.blank? %>
                       <%= link_to raw("#{image_tag 'blue_arrow.png'} #{child.name}"),
                                   products_path(child.permalink) %>
                     <% else %>
-                      <label class="tree-toggler nav-header label-for-child">
+                      <label class="tree-toggler nav-header">
                         <%= image_tag 'blue_arrow.png' %>
                         <%= child.name.titleize %>
                         <i class="fa fa-plus" aria-hidden="true"></i>

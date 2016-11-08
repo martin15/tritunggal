@@ -135,8 +135,15 @@ Last change:	23.02.2016
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 700;
+/*  font-weight: 700;*/
   src: local('Montserrat-Bold'), url(/assets/Montserrat.woff2) format('woff2');
+/*  src: local('Montserrat-Bold'),font-url('Montserrat.woff2') format('woff2');*/
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+  font-family: 'Montserrat-Normal';
+  src: url(/assets/Montserrat-Light.otf) format('otf');
 /*  src: local('Montserrat-Bold'),font-url('Montserrat.woff2') format('woff2');*/
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
@@ -178,16 +185,15 @@ section > .page-header{
 
 section > .page-header .name{
   font-size: 30px;
-  padding: 20px 0;
+  padding: 27px 0;
   color: #fff;
-  font-weight: 300;
-  font-family: "Montserrat",sans-serif;
+  font-family: "Montserrat-Normal",sans-serif;
 }
 section > .page-header div.breadcrumb{
   font-size: 12px;
   text-align: right;
   color: #fff;
-  font-family: "Montserrat",sans-serif;
+  font-family: "Montserrat-Normal",sans-serif;
   padding: 35px 0;
 }
 
@@ -1265,10 +1271,37 @@ footer#footer-info{
   width: 100%;
   font-size: 14px;
   margin-bottom: 20px;
+  font-family: "Montserrat-Normal",sans-serif;
+}
+
+.product-detail-short-description > .title{
+  padding-left: 0px;
+  margin-bottom: 5px;
+  width: 40%;
+  float: left;
+  position: relative;
+  padding: 5px 15px 5px 5px;
+}
+
+.product-detail-short-description > .value{
+  padding-right: 0px;
+  margin-bottom: 5px;
+  width: 60%;
+  float: left;
+  position: relative;
+  padding: 5px 5px 5px 15px;
 }
 
 .product-detail-specification{
   margin-bottom: 30px;
+}
+
+.product-detail-short-description > p {
+  line-height: 25px;
+}
+
+.grey{
+  background-color: #eee;
 }
 
 .product-detail-specification .panel-heading{
@@ -1489,7 +1522,7 @@ label.nav-header i{
 
 ul#parent > li > label, ul#parent > li > a {
   background: #ccc none repeat scroll 0 0;
-  padding: 15px 10px;
+  padding: 15px 5px 15px 10px;
   cursor: pointer;
   margin: 0;
 }
@@ -1530,3 +1563,12 @@ ul.tree li img{
   margin-right: 5px;
 }
 
+.about-us{
+  padding: 0 15%
+}
+
+.about-us img{
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
