@@ -12,34 +12,21 @@
 
 <div class="container">
   <%= render :partial => "shared/flash" %>
-  <div class="col-xs-12 no-padding-lr certificate-umum">
-    <h3>Umum</h3>
-    <% @certificate_umum.each do |umum| %>
+  <% @certificates.each do |type, certiticates_arr| %>
+    <div class="col-xs-12 no-padding-lr certificates">
+      <h3><%= @certificate_categories["#{type}"] %></h3>
+       <% certiticates_arr.each do |certificate| %>
         <%= link_to raw("
           <div class='col-xs-6 col-md-4 col-lg-3 no-padding-lr certificate'>
             <div class='certificate-image'>
-              #{image_tag umum.image.url(:medium), :class => "img-responsive"}
+              #{image_tag certificate.image.url(:medium), :class => "img-responsive"}
             </div>
             <div class='certificate-name'>
-              #{umum.name.titleize}
+              #{certificate.name}
             </div>
           </div>
-        "), umum.file.url, :target => "_blank" %>
-    <% end %>
-  </div>
-  <div class="col-xs-12 no-padding-lr certificate-teknik">
-    <h3>Teknik</h3>
-    <% @certificate_teknik.each do |teknik| %>
-        <%= link_to raw("
-          <div class='col-xs-6 col-md-4 col-lg-3 no-padding-lr certificate'>
-            <div class='certificate-image'>
-              #{image_tag teknik.image.url(:medium), :class => "img-responsive"}
-            </div>
-            <div class='certificate-name'>
-              #{teknik.name.titleize}
-            </div>
-          </div>
-        "), teknik.file.url, :target => "_blank" %>
-    <% end %>
-  </div>
+        "), certificate.file.url, :target => "_blank" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

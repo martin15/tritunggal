@@ -33,7 +33,7 @@
         <tr>
           <th><%= @no+x+1 %></th>
           <td><%= image_tag certificate.try(:image).try(:url, :thumb) %></td>
-          <td><%= certificate.name.titleize %></td>
+          <td><%= certificate.name %></td>
           <td><%= certificate.try(:certificate_category).try(:name) %></td>
           <td>
             <%= link_to File.basename(certificate.file.url), certificate.try(:file).try(:url),
