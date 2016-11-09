@@ -12,7 +12,11 @@
 
 <div class="container">
   <%= render :partial => "shared/flash" %>
-  <p><%= link_to "Add new certificate", new_admin_certificate_path %></p>
+  <p>
+    <%= link_to "Add new certificate", new_admin_certificate_path %>
+    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <%= link_to "Certificate Categories", admin_certificate_categories_path %>
+  </p>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -30,7 +34,7 @@
           <th><%= @no+x+1 %></th>
           <td><%= image_tag certificate.try(:image).try(:url, :thumb) %></td>
           <td><%= certificate.name.titleize %></td>
-          <td><%= certificate.certificate_type %></td>
+          <td><%= certificate.try(:certificate_category).try(:name) %></td>
           <td>
             <%= link_to File.basename(certificate.file.url), certificate.try(:file).try(:url),
                         :class=>"red-link" %>

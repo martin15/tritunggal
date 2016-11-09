@@ -8,6 +8,7 @@ class Admin::CertificatesController < Admin::ApplicationController
 
   def new
     @certificate = Certificate.new
+    @categories = CertificateCategory.all.map{|cat| [cat.name, cat.id]}
   end
 
   def create
@@ -16,12 +17,14 @@ class Admin::CertificatesController < Admin::ApplicationController
       flash[:notice] = 'Certificate was successfully create.'
       redirect_to admin_certificates_path
     else
+      @categories = CertificateCategory.all.map{|cat| [cat.name, cat.id]}
       flash[:error] = "Certificate failed to create"
       render :action => :new
     end
   end
 
   def edit
+    @categories = CertificateCategory.all.map{|cat| [cat.name, cat.id]}
   end
 
   def update
@@ -29,6 +32,7 @@ class Admin::CertificatesController < Admin::ApplicationController
       flash[:notice] = 'Certificate was successfully updated.'
       redirect_to admin_certificates_path
     else
+      @categories = CertificateCategory.all.map{|cat| [cat.name, cat.id]}
       flash[:error] = "Certificate failed to update"
       render :action => :edit
     end
@@ -43,7 +47,8 @@ class Admin::CertificatesController < Admin::ApplicationController
   private
 
     def certificate_params
-      params.require(:certificate).permit(:name, :description, :image, :file, :permalink, :certificate_type)
+      params.require(:certificate).permit(:name, :description, :image, :file, :permalink,
+                                          :certificate_category_id)
     end
 
     def find_certificate

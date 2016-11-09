@@ -1,0 +1,42 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">Certificate Categories</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Admin", admin_path %></li>
+        <li class="active">Certificate Categories</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <p><%= link_to "Add new Certificate Category", new_admin_certificate_category_path %></p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th class="green-link"><%= sortable("name", "Name") %></th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @certificate_categories.each_with_index do |certificate_category, x| %>
+        <tr>
+          <th><%= @no+x+1 %></th>
+          <td><%= certificate_category.name.titleize %></td>
+          <td>
+            <%= link_to "Edit", edit_admin_certificate_category_path(certificate_category.id),
+                                :class => "btn btn-success" %>
+            <%= link_to "Delete", admin_certificate_category_path(certificate_category.id ),
+                                  :method => :delete,
+                                  :data => {:confirm => "Are you sure?"}, :class => "btn btn-warning" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="col-xs-12 no_padding_lr pagination"><%= paginate @certificate_categories %></div>
+</div>

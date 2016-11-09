@@ -1,0 +1,21 @@
+<% if @certificate_category.errors.any? %>
+  <div class="alert alert-danger alert-dismissable" group="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4><%= pluralize(@certificate_category.errors.count, "error") %> prohibited this group from being saved:</h4>
+    <ul>
+    <% @certificate_category.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-group">
+  <%= f.label :name, "Name *", :class => "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+</div>

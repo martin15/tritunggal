@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :banners
     resources :categories
+    resources :certificate_categories
     resources :certificates
     get "product/products_by_category/:cat_permalink" => "products#products_by_category",
         :as => "products_by_category"
