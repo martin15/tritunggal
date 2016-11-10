@@ -961,11 +961,29 @@ button, .btn{
   transition: visibility 0s linear 0.25s, opacity 0.25s linear 0s;
   -webkit-transition: visibility 0s linear 0.250s,opacity 0.250s linear;
   margin-bottom: 10px;
+  height: 55px;
 }
 
 .client-name{
   opacity: 1!important;
   visibility: visible!important;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+  .home-certificate-name, .main-certificate-name, .certificate-name{
+    opacity: 1;
+    visibility: visible;
+    font-size: 12px;
+    height: 35px;
+  }
 }
 
 .home-certificate:hover .home-certificate-name,
@@ -1655,3 +1673,4 @@ ul.tree li img{
     padding: 0 20px;
   }
 }
+
