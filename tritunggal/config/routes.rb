@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :certificate_categories
     resources :certificates
+    resources :clients
     get "product/products_by_category/:cat_permalink" => "products#products_by_category",
         :as => "products_by_category"
     get "contact_us_list" => "contact_us#index", :as => "contact_us_list"

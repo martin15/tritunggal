@@ -1,3 +1,8 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "owl.carousel.min" %>
+  <%= stylesheet_link_tag  "owl.carousel.css", "owl.transitions.css" %>
+<% end %>
+
 <div class="page-header">
   <div class="container">
     <div class="col-xs-12 col-sm-4 name no-padding-lr">About Us</div>
@@ -15,11 +20,40 @@
   <div class="col-xs-12 about-us">
     <%= raw @about_us.value %>
   </div>
+
+  <% unless @clients.empty? %>
+    <div class="col-xs-12 clients-header">
+      <h3>Our Clients</h3>
+    </div>
+    <div class="col-xs-12 clients" id="client-slider">
+      <% @clients.each do |client| %>
+        <div class="item">
+          <div class='col-xs-12 no-padding-lr home-certificate'>
+            <div class='client-image'>
+              <%= image_tag client.logo.url(:thumb), :class => "img-responsive" %>
+            </div>
+            <div class='client-name'>
+              <%= client.name %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function() {
       $('table').addClass( "table table-bordered" );
+
+      $("#client-slider").owlCarousel({
+        autoPlay: 5000, //Set AutoPlay to 3 seconds
+        items : 4,
+        itemsDesktop : [1199,3],
+        itemsDesktopSmall : [979,3],
+        itemsTablet: [768,2]
+      });
     })
 
 </script>
+

@@ -935,7 +935,8 @@ button, .btn{
 .home-product-image, .home-product-name,
 .home-certificate-image, .home-certificate-name,
 .main-certificate-image, .main-certificate-name,
-.certificate-image, .certificate-name{
+.certificate-image, .certificate-name,
+.client-image, .client-name{
   width: 100%;
   float: left;
   margin-bottom: 10px;
@@ -943,7 +944,7 @@ button, .btn{
 }
 
 .home-certificate-image img, .main-certificate-image img, .certificate-image img,
-.home-product-image img{
+.home-product-image img, .client-image img{
   margin: 0 auto 10px;
 }
 
@@ -951,8 +952,8 @@ button, .btn{
   padding-top: 20px;
 }
 
-.home-certificate-name, .main-certificate-name, .certificate-name{
-  font-family: "Montserrat", sans-serif;
+.home-certificate-name, .main-certificate-name, .certificate-name, .client-name{
+  font-family: "Montserrat-Normal", sans-serif;
   opacity: 0;
   filter: alpha(opacity=0);
   visibility: hidden;
@@ -960,6 +961,11 @@ button, .btn{
   transition: visibility 0s linear 0.25s, opacity 0.25s linear 0s;
   -webkit-transition: visibility 0s linear 0.250s,opacity 0.250s linear;
   margin-bottom: 10px;
+}
+
+.client-name{
+  opacity: 1!important;
+  visibility: visible!important;
 }
 
 .home-certificate:hover .home-certificate-name,
@@ -1064,9 +1070,46 @@ footer#footer-info{
 
 .footer-address{
   margin-top: 30px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
-  text-align: center;
+}
+
+.footer-address .office{
+  padding-left: 50px;
+}
+
+.footer-address .factory{
+  padding-left: 250px;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footer-address .factory{
+    padding-left: 200px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer-address .office{
+    padding-left: 50px;
+  }
+  .footer-address .factory{
+    padding-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .footer-address .office{
+    text-align: center;
+    padding: 20px 0px;
+    border-top: 1px solid #484848;
+    border-bottom: 1px solid #484848;
+  }
+
+  .footer-address .factory{
+    text-align: center;
+    margin-top: 30px;
+    padding-left: 0px;
+  }
 }
 
 /*********************************  footer end **************************************/
@@ -1569,12 +1612,46 @@ ul.tree li img{
   margin-right: 5px;
 }
 
-.about-us{
+.about-us, .clients-header, .clients{
   padding: 0 15%
+}
+
+.about-us, .clients{
+  margin-bottom: 25px;
+  font-family: "Montserrat-Normal",sans-serif;
 }
 
 .about-us img{
   display: block;
   height: auto;
   max-width: 100%;
+}
+
+.about-us p{
+  font-family: "Montserrat-Normal",sans-serif;
+}
+
+.clients-header h3{
+  font-size: 30px;
+  border-bottom: 1px solid #e3e3e3;
+  padding-bottom: 15px;
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .about-us, .clients-header, .clients{
+    padding: 0 10%
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .about-us, .clients-header, .clients{
+    padding: 0 5%
+  }
+}
+
+@media (max-width: 767px) {
+  .about-us, .clients-header, .clients{
+    padding: 0 20px;
+  }
 }

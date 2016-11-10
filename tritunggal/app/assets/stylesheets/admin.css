@@ -62,3 +62,7 @@ a.red-link{
   color: #fff;
   text-decoration: none;
 }
+
+.admin .client-image img{
+  width: 100px;
+}

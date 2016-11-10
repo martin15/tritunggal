@@ -38,10 +38,11 @@
           <li class="nav-item"><%= link_to "Certificates", admin_certificates_path %></li>
           <li class="nav-item"><%= link_to "Contact Us", admin_contact_us_list_path %></li>
           <li class="nav-item dropdown">
-            <%= link_to "Settings", "javascript:void(0)" %>
+            <%= link_to raw("Settings&nbsp;&nbsp;"), "javascript:void(0)" %>
             <ul role="menu" class="dropdown-menu">
               <li class="nav-item"><%= link_to "About Us", edit_admin_system_setting_path("about-us") %></li>
               <li class="nav-item"><%= link_to "Banner", admin_banners_path %></li>
+              <li class="nav-item"><%= link_to "Clients", admin_clients_path %></li>
             </ul>
           </li>
         </ul>
