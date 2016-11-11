@@ -190,18 +190,6 @@
               </div>
             ") %>
           </div>
-          <div class="item">
-            <%= link_to raw("
-              <div class='col-xs-12 no-padding-lr home-certificate'>
-                <div class='home-product-image'>
-                  #{image_tag product.product_images.first.image.url(:medium), :class => "img-responsive"}
-                </div>
-                <div class='home-product-name'>
-                  #{product.name}
-                </div>
-              </div>
-            ") %>
-          </div>
         <% end %>
         <%# (0..8).each do |x| %>
           <%#*<div class="item">%>

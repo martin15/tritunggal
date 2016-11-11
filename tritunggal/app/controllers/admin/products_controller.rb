@@ -90,7 +90,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
     def product_params
       params.require(:product).permit(:name, :sku, :short_specification, :specification,
-                                      :certificate,
+                                      :certificate, :best_seller,
                                       :product_images_attributes =>[:id, :image, :product_id] )
     end
 
@@ -103,12 +103,14 @@ class Admin::ProductsController < Admin::ApplicationController
     end
 
     def validate_categories
+      @categories=[]
       unless params[:category_ids].nil?
         @categories = Category.where("id in (?)", params[:category_ids])
       end
     end
 
     def validate_certificates
+      @certificates = []
       unless params[:certificates].nil?
         @certificates = Certificate.where("id in (?)", params[:certificates])
       end

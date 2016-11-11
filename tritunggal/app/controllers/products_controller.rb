@@ -9,6 +9,8 @@ class ProductsController < ApplicationController
 
   def show
     @product_images = @product.product_images
+    @certificates = @product.certificates
+    @related_products = @category.products.sample(4)
   end
 
   def search

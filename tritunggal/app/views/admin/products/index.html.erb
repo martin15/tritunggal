@@ -21,6 +21,7 @@
         <th class="green-link"><%= sortable("name", "Name") %></th>
         <th class="green-link"><%= sortable("sku", "SKU") %></th>
         <th>Categories</th>
+        <th>Certificates</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -34,6 +35,11 @@
           <td>
             <% product.categories.each do |cat| %>
               <%= link_to cat.name, admin_products_by_category_path(cat.permalink) %><br />
+            <% end %>
+          </td>
+          <td>
+            <% product.certificates.each do |certificate| %>
+              <%= link_to certificate.name, edit_admin_certificate_path(certificate.id) %><br />
             <% end %>
           </td>
           <td>

@@ -9,6 +9,8 @@ class Product < ActiveRecord::Base
 
   accepts_nested_attributes_for :product_images
 
+  scope :best_seller, -> {where("best_seller = true")}
+
   def display_image
     self.product_images.first
   end
@@ -16,4 +18,5 @@ class Product < ActiveRecord::Base
   def category
     self.categories.first
   end
+
 end
