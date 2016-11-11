@@ -1,6 +1,7 @@
 class Admin::ProductsController < Admin::ApplicationController
   before_filter :find_product, :only => [:edit, :update, :destroy, :delete]
   before_filter :validate_categories, :only => [:create, :update]
+  before_filter :validate_certificates, :only => [:create, :update]
 
   def index
     @products = Product.order("#{sort_column} #{sort_direction}").page(params[:page]).per(20)
@@ -12,11 +13,21 @@ class Admin::ProductsController < Admin::ApplicationController
     @p_categories = Category.parent_categories.includes([:child_categories])
     @product_image = @product.product_images.build
     @product_categories = []
+    certificate_cat = CertificateCategory.all
+    @option_for_certificate = []
+    certificate_cat.each do |cat|
+      certicates_temp = []
+      cat.certificates.each do |certificate|
+        certicates_temp << [certificate.name, certificate.id]
+      end
+      @option_for_certificate << [cat.name] + [certicates_temp]
+    end
   end
 
   def create
     @product = Product.new(product_params)
     @product.categories = @categories
+    @product.certificates = @certificates
     if @product.save
       params[:product_images]['image'].each do |a|
           @product_image = @product.product_images.create!(:image => a)
@@ -33,11 +44,22 @@ class Admin::ProductsController < Admin::ApplicationController
   def edit
     @p_categories = Category.parent_categories.includes([:child_categories])
     @product_categories = @product.categories.map(&:id)
+    certificate_cat = CertificateCategory.all
+    @option_for_certificate = []
+    certificate_cat.each do |cat|
+      certicates_temp = []
+      cat.certificates.each do |certificate|
+        certicates_temp << [certificate.name, certificate.id]
+      end
+      @option_for_certificate << [cat.name] + [certicates_temp]
+    end
+    params[:certificates] = @product.certificates.map(&:id)
   end
 
   def update
     if @product.update_attributes(product_params)
       @product.categories = @categories
+      @product.certificates = @certificates
       @product.save
       flash[:notice] = 'Product was successfully updated.'
       redirect_to admin_products_path
@@ -83,6 +105,12 @@ class Admin::ProductsController < Admin::ApplicationController
     def validate_categories
       unless params[:category_ids].nil?
         @categories = Category.where("id in (?)", params[:category_ids])
+      end
+    end
+
+    def validate_certificates
+      unless params[:certificates].nil?
+        @certificates = Certificate.where("id in (?)", params[:certificates])
       end
     end
 

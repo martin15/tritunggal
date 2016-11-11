@@ -1,5 +1,6 @@
 <% content_for :javascript_includes do %>
-  <%= javascript_include_tag "/assets/ckeditor/ckeditor" %>
+  <%= javascript_include_tag "/assets/ckeditor/ckeditor", "select2.full.js" %>
+  <%= stylesheet_link_tag  "select2.css" %>
 <% end %>
 
 <% if @product.errors.any? %>
@@ -58,6 +59,15 @@
                         :ckeditor => {:uiColor => "#f0e5d2", :toolbar => "Basic"}%>
     </div>
   </div>
+  <div class="form-group">
+    <%= label_tag "certificates[]", "Certificates",
+                  :class => "col-sm-2 control-label no-padding-l" %>
+    <div class="col-sm-10">
+      <%= select_tag "certificates[]", grouped_options_for_select(@option_for_certificate, params[:certificates]),
+                      :multiple => true,
+                      :include_blank => true, :class => "form-control select2" %>
+    </div>
+  </div>
 </div>
 <div class="col-sm-4">
   <h4>List Category</h4>
@@ -104,37 +114,15 @@
           <% end %>
         </ul>
         <% end %>
-
-        <%# if cat.last_child? %>
-          <%#*<div class="checkbox">%>
-            <%#*<label>%>
-              <%#= check_box_tag "category_ids[]", cat.id, @product_categories.include?(cat.id) %>
-              <%#= cat.name %>
-            <%#*</label>%>
-          <%#*</div>%>
-        <%# else %>
-          <%#= cat.name %>
-        <%# end %>
-        <%#*<ul class="list-child-category">%>
-          <%# cat.child_categories.each do |child| %>
-            <%#*<li>%>
-              <%# if child.last_child? %>
-                <%#*<div class="checkbox">%>
-                  <%#*<label>%>
-                    <%#= check_box_tag "category_ids[]", child.id,
-                                      @product_categories.include?(child.id) %>
-                    <%#= child.name %>
-                  <%#*</label>%>
-                <%#*</div>%>
-              <%# else %>
-                <%#= child.name %>
-              <%# end %>
-            <%#*</li>%>
-          <%# end %>
-        <%#*</ul>%>
       </li>
     <% end %>
   </ul>
 </div>
 
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".select2").select2({
+      tags: true
+    });
+  })
+</script>

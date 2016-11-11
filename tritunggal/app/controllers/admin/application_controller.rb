@@ -3,6 +3,7 @@ class Admin::ApplicationController < ApplicationController
   #before_filter :require_login
   layout 'admin'
   before_filter :require_admin_login
+  skip_before_filter :get_parent_categories
 
   def require_admin_login
      if current_user.nil?
