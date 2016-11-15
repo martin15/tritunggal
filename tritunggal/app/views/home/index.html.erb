@@ -102,64 +102,66 @@
 
   </script>
 
-  <div class="col-xs-12 banner">
-    <div class="owl-carousel"  id="main-slider">
-      <!--<div class="item" style="background-image: url(../assets/AEA_001.jpg);">
-        <div class="slider-inner">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="carousel-content">
-                  <h2><span>Multi</span> is the best Onepage html template</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et  dolore magna incididunt ut labore aliqua. </p>
-                  <a class="btn btn-primary btn-lg" href="#">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>/.item-->
-      <% @banners.each do |banner| %>
-        <div class="item">
-          <%= link_to (image_tag banner.image.url, :class=> "img-responsive") %>
-        </div>
-        <%#= link_to raw("<div class='item' style='background-image: url(#{banner.image.url(:large)});'></div>") %>
-      <% end %>
-    </div><!--/.owl-carousel-->
-    <div class="col-xs-12 no-padding-lr home-about-us">
-      <h3>Tritunggal Swarna</h3>
-      <h4>
-        We offer you the best solutions in Low Voltage Electrical Power Distribution
-      </h4>
-      <h4>
-        <%= link_to "Read All", about_us_path %>
-      </h4>
-
-    </div>
-    <div class="col-xs-12 no-padding-lr">
-      <% [["product.png", "Products", "bolt", "/products/#{@category.permalink}"],
-          ["certificates.png", "Certificates", "file-text-o", "/certificates"],
-          ["about-us.png", "About Us", "briefcase", "/about_us"],
-          ["contact-us.png", "Contact Us", "map", "/contact_us"]].each do |arr| %>
-        <div class="col-xs-6 col-sm-3 no-padding-lr" style="font-size:12px;">
-          <div class="ct-imageBox"  style="float:left">
-            <%= image_tag arr[0], :class => "img-responsive", :alt => "About us image" %>
-            <div class="figcaption" style="float:left">
-              <div class="inner">
-                <div class="inner-cell">
-                  <div class="ct-imageBox-icon">
-                    <i class="fa fa-<%= arr[2] %>"></i>
+  <div class="home-banner">
+    <div class="col-xs-12 banner">
+      <div class="owl-carousel"  id="main-slider">
+        <!--<div class="item" style="background-image: url(../assets/AEA_001.jpg);">
+          <div class="slider-inner">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="carousel-content">
+                    <h2><span>Multi</span> is the best Onepage html template</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et  dolore magna incididunt ut labore aliqua. </p>
+                    <a class="btn btn-primary btn-lg" href="#">Read More</a>
                   </div>
-                  <%= link_to raw("#{arr[1]}<i class='fa fa-caret-right'></i>"), arr[3],
-                              :class => "btn btn-transparent btn-withIcon btn-motiveColor"  %>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-  </div><!--/#main-slider-->
+        </div>/.item-->
+        <% @banners.each do |banner| %>
+          <div class="item">
+            <%= link_to (image_tag banner.image.url, :class=> "img-responsive") %>
+          </div>
+          <%#= link_to raw("<div class='item' style='background-image: url(#{banner.image.url(:large)});'></div>") %>
+        <% end %>
+      </div><!--/.owl-carousel-->
+      <div class="col-xs-12 no-padding-lr home-about-us">
+        <h3>Tritunggal Swarna</h3>
+        <h4>
+          We offer you the best solutions in Low Voltage Electrical Power Distribution
+        </h4>
+        <h4>
+          <%= link_to "Read All", about_us_path %>
+        </h4>
+
+      </div>
+      <div class="col-xs-12 no-padding-lr">
+        <% [["product.png", "Products", "bolt", "/products/#{@category.permalink}"],
+            ["certificates.png", "Certificates", "file-text-o", "/certificates"],
+            ["about-us.png", "About Us", "briefcase", "/about_us"],
+            ["contact-us.png", "Contact Us", "map", "/contact_us"]].each do |arr| %>
+          <div class="col-xs-6 col-sm-3 no-padding-lr" style="font-size:12px;">
+            <div class="ct-imageBox"  style="float:left">
+              <%= image_tag arr[0], :class => "img-responsive", :alt => "About us image" %>
+              <div class="figcaption" style="float:left">
+                <div class="inner">
+                  <div class="inner-cell">
+                    <div class="ct-imageBox-icon">
+                      <i class="fa fa-<%= arr[2] %>"></i>
+                    </div>
+                    <%= link_to raw("#{arr[1]}<i class='fa fa-caret-right'></i>"), arr[3],
+                                :class => "btn btn-transparent btn-withIcon btn-motiveColor"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div><!--/#main-slider-->
+  </div>
 <% end %>
 
 <div class="container homepage">

@@ -168,8 +168,20 @@ section > .container{
   padding-top: 50px;
 }
 
+@media (min-width: 992px) and (max-width: 1199px) {
+  .home-banner{width: 990px;margin: 0 auto}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .home-banner{width: 765px;margin: 0 auto}
+}
+
+/*@media (max-width: 767px) {
+  .home-banner{width: auto;margin: 0 auto}
+}*/
+
 .banner{margin: 0 auto;float: none;padding: 0;}
-.banner::after, section > .page-header::after{
+.banner:after, section > .page-header::after{
   clear: both;
   content: "";
   display: table;
@@ -314,14 +326,28 @@ nav.with-user-bar{
   font-size: 12px;
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar-default .navbar-nav > li > a {
+    font-size: 11px;
+  }
+}
+
 @media only screen and (min-width: 992px) {
   .navbar-default .navbar-nav > li > a {
-    padding: 30px 20px; }
+    padding: 20px 20px 40px;
+  }
+  .navbar-default .navbar-nav > li.dropdown:after{
+    top: 37%;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
   .navbar-default .navbar-nav > li > a {
-    padding: 30px; }
+    padding: 30px;
+  }
+  .navbar-default .navbar-nav > li.dropdown:after{
+    top: 50%;
+  }
 }
 
 .navbar-default .navbar-nav > li > a:before, .navbar-default .navbar-nav > li > a:after {
