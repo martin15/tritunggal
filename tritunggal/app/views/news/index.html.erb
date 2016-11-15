@@ -1,0 +1,40 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">News</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <li class="active">News</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <div class="col-xs-12 news-list no-padding-lr">
+    <% @all_news.each do |news| %>
+      <div class="col-xs-12 news">
+        <div class="col-xs-1 news-date">
+          <span class="day"><%= news.updated_at.day %></span>
+          <span class="month"><%= news.updated_at.strftime('%b') %></span>
+        </div>
+        <div class="col-xs-11 news-short-detail">
+          <span class="col-xs-12 title"><%= link_to news.title, news_detail_path(news.permalink) %></span>
+          <span class="col-xs-12 short-content">
+            <%= simple_format(news.short_content +
+                              " #{link_to '[...]', news_detail_path(news.permalink)}") %>
+          </span>
+          <span class="col-xs-12 writer">
+            <i class="fa fa-user"></i>By <%= news.user %>
+            <%= link_to "Read More...", news_detail_path(news.permalink), :class => "btn read-more" %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-xs-12 no_padding_lr pagination"><%= paginate @all_news %></div>
+  </div>
+
+</div>
+
+

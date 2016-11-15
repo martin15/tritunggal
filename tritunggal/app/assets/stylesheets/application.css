@@ -168,7 +168,7 @@ section > .container{
   padding-top: 50px;
 }
 
-.banner{width: 100%;}
+.banner{margin: 0 auto;float: none;padding: 0;}
 .banner::after, section > .page-header::after{
   clear: both;
   content: "";
@@ -385,6 +385,7 @@ nav.with-user-bar{
 .navbar-default.navbar-light .navbar-nav > li.active a {border-bottom-color: #0088cc; }
 
 .navbar-default .navbar-nav .dropdown-menu {
+  font-family: "Montserrat-Normal",sans-serif;
   background-color: #343434;
   box-shadow: none;
   border: 0 none;
@@ -954,9 +955,9 @@ button, .btn{
 
 .home-certificate-name, .main-certificate-name, .certificate-name, .client-name{
   font-family: "Montserrat-Normal", sans-serif;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  visibility: hidden;
+  opacity: 0\1;
+  filter: alpha(opacity=1);
+  visibility: visible;
   text-transform: uppercase;
   transition: visibility 0s linear 0.25s, opacity 0.25s linear 0s;
   -webkit-transition: visibility 0s linear 0.250s,opacity 0.250s linear;
@@ -1036,7 +1037,7 @@ footer#footer-info{
 }
 
 .ct-menu-footer li{
-  padding: 0 30px;
+  padding: 0 20px;
   float: left;
 }
 
@@ -1092,14 +1093,10 @@ footer#footer-info{
   font-size: 14px;
 }
 
-.footer-address .office{
-  padding-left: 50px;
+.footer-address .office, .footer-address .factory1, .footer-address .factory2{
+  text-align: center;
 }
-
-.footer-address .factory{
-  padding-left: 250px;
-}
-
+/*
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer-address .factory{
     padding-left: 200px;
@@ -1113,17 +1110,17 @@ footer#footer-info{
   .footer-address .factory{
     padding-left: 100px;
   }
-}
+}*/
 
 @media only screen and (max-width: 767px) {
-  .footer-address .office{
+  .footer-address .office, .footer-address .factory1{
     text-align: center;
     padding: 20px 0px;
     border-top: 1px solid #484848;
     border-bottom: 1px solid #484848;
   }
 
-  .footer-address .factory{
+  .footer-address .factory2{
     text-align: center;
     margin-top: 30px;
     padding-left: 0px;
@@ -1403,9 +1400,12 @@ footer#footer-info{
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 70%, rgba(0, 0, 0, 0) 100%);
 }
 
+.container-map{
+  padding: 0px!important;
+}
+
 .map{
   height: 600px;
-  width: 100%;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -1674,3 +1674,76 @@ ul.tree li img{
   }
 }
 
+.news-list > .pagination{
+  text-align: center;
+}
+
+div.news:first-child{
+  margin-top: 0px;
+}
+
+.news{
+  font-family: "Montserrat-Normal",sans-serif;
+  border-bottom: 1px solid #ddd;
+  margin-top: 35px;
+}
+
+.news .news-date .day, .news .news-date .month{
+  width: 40px;
+  float: left;
+  text-align: center;
+
+}
+
+.news .news-date .day{
+  background: #f4f4f4 none repeat scroll 0 0;
+  border-radius: 2px 2px 0 0;
+  font-size: 16px;
+  padding: 10px 0;
+  font-weight: 600;
+  color: #00bcdf;
+}
+
+.news .news-date .month{
+  color: #fff;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.07) inset;
+  background: #00bcdf none repeat scroll 0 0;
+  border-radius: 0 0 2px 2px;
+  font-size: 13px;
+  padding: 3px 0;
+}
+
+.news .news-short-detail .title, .news .news-detail .title{
+  font-size: 26px;
+  color: #00bcdf;
+  padding: 0 0 10px 0;
+}
+
+.news .news-short-detail .short-content, .news .news-detail .short-content{
+  font-size: 14px;
+  color: #777;
+  padding: 0 0 20px 0;
+  line-height: 22px;
+}
+
+.news .news-short-detail .writer, .news .news-detail .writer{
+  font-size: 13px;
+  color: #777;
+  padding: 0 0 20px 0;
+}
+
+.news .news-short-detail .writer i, .news .news-detail .writer i{margin-right: 5px;}
+
+.news .news-short-detail .writer .read-more, .news .news-detail .writer .read-more {
+  font-family: "Montserrat-Normal",sans-serif;
+  background-color: #00bcdf;
+  border-color: #00bcff;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px 10px 2px;
+  float: right;
+}
+
+.news .news-detail .title{
+  padding: 0;
+}

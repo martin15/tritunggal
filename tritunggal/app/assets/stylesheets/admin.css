@@ -1,5 +1,5 @@
 .admin .navbar-default .navbar-nav > li > a {
-  padding: 30px 25px !important;
+  padding: 20px !important;
 }
 
 .admin a:hover{
@@ -55,7 +55,7 @@ a.red-link{
 
 .admin .ct-menu-footer li {
   float: left;
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
 .admin .user-info-bar a:hover{
@@ -66,3 +66,8 @@ a.red-link{
 .admin .client-image img{
   width: 100px;
 }
+
+.admin .navbar-default .navbar-nav > li > a:before,
+.admin .navbar-default .navbar-nav > li > a:after {border: none; }
+
+.admin .navbar-default .navbar-nav > li > a:hover{color: #0088cc;}

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :about_us, :only => [:index]
   resources :certificates, :only => [:index]
   resources :contact_us, :only => [:index, :create]
+  get "/news" => "news#index", :as => "news"
+  get "/news/:permalink" => "news#show", :as => "news_detail"
   get "products/search" => "products#search", :as => "product_search"
   get "products/:cat_permalink" => "products#index", :as => "products"
   get "products/:cat_permalink/:prod_permalink" => "products#show", :as => "product_detail"
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
     resources :certificate_categories
     resources :certificates
     resources :clients
+    resources :news
     get "product/products_by_category/:cat_permalink" => "products#products_by_category",
         :as => "products_by_category"
     get "contact_us_list" => "contact_us#index", :as => "contact_us_list"

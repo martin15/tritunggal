@@ -1,0 +1,35 @@
+<div class="page-header">
+  <div class="container">
+    <div class="col-xs-12 col-sm-4 name no-padding-lr">News</div>
+    <div class="col-xs-12 col-sm-8 breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to "Home", root_path %></li>
+        <li class="active">News</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <%= render :partial => "shared/flash" %>
+  <div class="col-xs-12 news-list no-padding-lr">
+    <div class="col-xs-12 news">
+      <div class="col-xs-1 news-date">
+        <span class="day"><%= @news.updated_at.day %></span>
+        <span class="month"><%= @news.updated_at.strftime('%b') %></span>
+      </div>
+      <div class="col-xs-11 news-detail">
+        <span class="col-xs-12 title"><%= @news.title %></span>
+        <span class="col-xs-12 writer">
+          <i class="fa fa-user"></i>By <%= @news.user %>
+        </span>
+        <span class="col-xs-12 short-content">
+          <%= raw(@news.content) %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
