@@ -168,6 +168,10 @@ section > .container{
   padding-top: 50px;
 }
 
+@media (min-width: 1200px) {
+  .home-banner{width: 1200px;margin: 0 auto}
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .home-banner{width: 990px;margin: 0 auto}
 }
