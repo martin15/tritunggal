@@ -261,7 +261,7 @@ section > .page-header div.breadcrumb li.active{
   background-color: #fff;
   border: 0 none;
   margin-bottom: 0px;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 nav.normal{
@@ -1411,6 +1411,23 @@ footer#footer-info{
 .product-detail-specification .panel-heading li.active a,
 .product-detail-specification .panel-heading li a:hover{
   border-top: 4px solid #0088cc;
+}
+
+.product-detail-specification #specification img{
+  margin-bottom: 20px;
+}
+
+.product-detail-specification .product-file > p {
+  word-wrap:break-word;
+}
+
+.product-detail-specification .product-file > p a{
+  color: #00bcdf;
+}
+
+.product-detail-specification .product-file > p a:hover{
+  text-decoration: underline;
+  color: #0088cc
 }
 
 .product-detail-related-product h4{

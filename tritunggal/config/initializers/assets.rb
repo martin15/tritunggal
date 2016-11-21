@@ -11,7 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w(
   font-awesome.css bootstrap.css owl.carousel.css owl.transitions.css pgwslideshow_light.css
-  admin.css select2.css
-  disrupt.js owl.carousel.min.js pgwslideshow.js select2.full.js
+  admin.css select2.css magnific-popup.css
+  disrupt.js owl.carousel.min.js pgwslideshow.js select2.full.js jquery.magnific-popup.js
   *.svg *.eot *.woff *.ttf *.woff2 *.otf
 )

@@ -6,8 +6,9 @@ class Product < ActiveRecord::Base
   has_many :certificates, :through => :certificates_products, :dependent => :destroy
   has_many :certificates_products, :dependent => :destroy
   has_many :product_images, :dependent => :destroy
+  has_many :product_specifications, :dependent => :destroy
 
-  accepts_nested_attributes_for :product_images
+  accepts_nested_attributes_for :product_images, :product_specifications
 
   scope :best_seller, -> {where("best_seller = true")}
 

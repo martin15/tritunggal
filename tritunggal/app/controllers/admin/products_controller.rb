@@ -30,8 +30,11 @@ class Admin::ProductsController < Admin::ApplicationController
     @product.certificates = @certificates
     if @product.save
       params[:product_images]['image'].each do |a|
-          @product_image = @product.product_images.create!(:image => a)
-       end
+        @product_image = @product.product_images.create!(:image => a)
+      end
+      params[:product_specifications]['filename'].each do |a|
+        @product_specifications = @product.product_specifications.create!(:filename => a)
+      end
       flash[:notice] = 'Product was successfully create.'
       redirect_to admin_products_path
     else
@@ -91,7 +94,8 @@ class Admin::ProductsController < Admin::ApplicationController
     def product_params
       params.require(:product).permit(:name, :sku, :short_specification, :specification,
                                       :certificate, :best_seller,
-                                      :product_images_attributes =>[:id, :image, :product_id] )
+                                      :product_images_attributes =>[:id, :image, :product_id],
+                                      :product_specifications => [:id, :filename, :product_id] )
     end
 
     def find_product

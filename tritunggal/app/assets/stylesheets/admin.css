@@ -2,7 +2,23 @@
   padding: 20px !important;
 }
 
-.admin a:hover{
+.admin > section > .container a{
+  color: #00bcdf;
+}
+
+.admin > section > .container a.btn{
+  color: #fff;
+}
+
+.admin > section > .container a.btn:hover{
+  color: #e3e3e3!important;
+}
+
+.admin > section > .container a{
+  color: #00bcdf;
+}
+
+.admin a:hover, .admin > section > .container a:hover{
   text-decoration: underline;
   color: #0088cc
 }
@@ -25,32 +41,39 @@
 }
 
 a.green-link, th.green-link a{
-  color: #2ED1A2;
+  color: #2ED1A2!important;
 }
 
 a.red-link{
-  color: #c7254e;
+  color: #c7254e!important;
 }
 
-.product-image h3{
+.admin .product-image h3, .admin .product-specification h3{
   margin-top: 40px;
   margin-bottom: 30px;
 }
 
-.admin .product-image-box{
+.admin .product-specification h4{margin-bottom: 30px;}
+
+.admin .product-image-box, .admin .product-specification-box{
   background: #fff none repeat scroll 0 0;
   border: 1px solid #ddd;
   border-radius: 7px;
   width: 100%;
   float: left;
+  margin-bottom: 30px;
 }
 
-.admin .product-image-box img{
+.admin .product-image-box img, .admin .product-specification-box img{
   border-bottom: 1px solid #ddd;
 }
 
-.admin .product-image-box a{
+.admin .product-image-box a, .admin .product-specification-box a{
   padding:10px;
+}
+
+.admin .product-specification .product-file > p {
+  word-wrap:break-word;
 }
 
 .admin .ct-menu-footer li {

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :products do
       member do
         resources :product_images, :param => :product_image_id
+        resources :product_specifications, :param => :product_specification_id
       end
     end
     resources :system_settings, :only => [:edit, :update]

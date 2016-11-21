@@ -44,6 +44,7 @@
           </td>
           <td>
             <%= link_to "Product Images", admin_product_images_path(product), :class => "btn btn-info" %>
+            <%= link_to "Spec", admin_product_specifications_path(product), :class => "btn btn-danger" %>
             <%= link_to "Edit", edit_admin_product_path(product), :class => "btn btn-success" %>
             <%= link_to "Delete", admin_product_path(product.id ), :method => :delete,
                                   :data => {:confirm => "Are you sure?"}, :class => "btn btn-warning" %>

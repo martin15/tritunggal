@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
   def show
     @product_images = @product.product_images
+    @product_specifications = @product.product_specifications.group_by{|h| h.file_type}
     @certificates = @product.certificates
     @related_products = @category.products.sample(4)
   end
