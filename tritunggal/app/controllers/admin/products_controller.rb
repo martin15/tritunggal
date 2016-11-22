@@ -28,18 +28,33 @@ class Admin::ProductsController < Admin::ApplicationController
     @product = Product.new(product_params)
     @product.categories = @categories
     @product.certificates = @certificates
-    if @product.save
+    @image_nil = params[:product_images].nil? ? true : false
+    if !@image_nil && @product.save
       params[:product_images]['image'].each do |a|
         @product_image = @product.product_images.create!(:image => a)
       end
-      params[:product_specifications]['filename'].each do |a|
-        @product_specifications = @product.product_specifications.create!(:filename => a)
+      unless params[:product_specifications].nil?
+        params[:product_specifications]['filename'].each do |a|
+          @product_specifications = @product.product_specifications.create!(:filename => a)
+        end
       end
       flash[:notice] = 'Product was successfully create.'
       redirect_to admin_products_path
     else
       @p_categories = Category.parent_categories.includes([:child_categories])
+      @product_categories = @product.categories.map(&:id)
+      certificate_cat = CertificateCategory.all
+      @option_for_certificate = []
+      certificate_cat.each do |cat|
+        certicates_temp = []
+        cat.certificates.each do |certificate|
+          certicates_temp << [certificate.name, certificate.id]
+        end
+        @option_for_certificate << [cat.name] + [certicates_temp]
+      end
+      params[:certificates] = @product.certificates.map(&:id)
       flash[:error] = "Product failed to create"
+      flash[:error] += "<br />Image can't be blank!" if @image_nil
       render :action => :new
     end
   end
