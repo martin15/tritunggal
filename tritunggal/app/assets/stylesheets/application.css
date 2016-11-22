@@ -1346,6 +1346,7 @@ footer#footer-info{
 
 .product-detail-images > div > div.ps-current > ul{
   border: 1px solid #ddd;
+  background-color: #fff;
 }
 
 .product-detail-info .product-detail-name{

@@ -18,9 +18,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body id="home">
-  <script>
-    //alert($( window ).width());
-  </script>
   <nav class="navbar navbar-default navbar-fixed <%= manage_menu %>">
     <% unless current_user.nil? %>
       <div class="col-sm-12 user-info-bar">
@@ -81,7 +78,7 @@
   </nav>
 
 
-<section id="section" class="<%= manage_banner %>">
+  <section id="section" class="<%= manage_banner %>">
     <%= yield :banner %>
     <%= yield %>
   </section>

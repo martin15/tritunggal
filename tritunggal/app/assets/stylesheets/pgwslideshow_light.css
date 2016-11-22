@@ -82,6 +82,7 @@
     margin: 15px 8px;
     opacity: 0.6;
     filter: alpha(opacity=60);
+    background-color: #fff;
 }
 
 .pgwSlideshowLight .ps-list li img {
