@@ -10,6 +10,13 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def new
     @product = Product.new
+    @product.short_specification = "
+     <p></p><table class='table table-striped' style='width:100%'>
+        <tr><td>title</td><td>info</td></tr>
+        <tr><td></td><td></td></tr>
+        <tr><td></td><td></td></tr>
+        <tr><td></td><td></td></tr>
+      </table><p></p>"
     @p_categories = Category.parent_categories.includes([:child_categories])
     @product_image = @product.product_images.build
     @product_categories = []
