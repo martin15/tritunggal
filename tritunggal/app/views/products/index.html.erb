@@ -128,7 +128,7 @@
           <div class="product-image">
             <% product.product_images.sample(2).each_with_index do |img, x| %>
               <% style = x%2 == 0 ? 'first-img' : 'second-img' %>
-              <%= link_to (image_tag img.image.url(:medium), :class => "img-responsive #{style}"),
+              <%= link_to (image_tag img.image.url(:medium), :class => "img-loading img-responsive #{style}"),
                         product_detail_path(:cat_permalink => @category.permalink,
                                             :prod_permalink => product.permalink) %>
             <% end %>
@@ -143,6 +143,9 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+      $('img').load(function(){
+         $(this).css('background','none');
+      });
 
       $('label.tree-toggler').click(function () {
         //$("ul#parent > li > ul.son").hide();

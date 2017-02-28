@@ -19,7 +19,7 @@
         <%= link_to raw("
           <div class='col-xs-6 col-md-4 col-lg-3 no-padding-lr certificate'>
             <div class='certificate-image'>
-              #{image_tag certificate.image.url(:medium), :class => "img-responsive"}
+              #{image_tag certificate.image.url(:medium), :class => "img-loading img-responsive"}
             </div>
             <div class='certificate-name'>
               #{certificate.name}
@@ -30,3 +30,13 @@
     </div>
   <% end %>
 </div>
+
+<script>
+$(document).ready(function() {
+  $('img').load(function(){
+     $(this).css('background','none');
+  });
+})
+
+</script>
+

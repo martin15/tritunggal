@@ -1338,6 +1338,7 @@ footer#footer-info{
 
 .product-detail-images, .product-detail-info{
   margin-bottom: 30px;
+  overflow: hidden;
 }
 
 .product-detail-images ul{
@@ -1367,6 +1368,11 @@ footer#footer-info{
   font-size: 14px;
   margin-bottom: 20px;
   font-family: "Montserrat-Normal",sans-serif;
+}
+
+.product-detail-short-description table > tbody > tr > td:first-child{
+  display: inline-block;
+  height:100%;
 }
 
 .product-detail-short-description > .title{
@@ -1503,11 +1509,11 @@ footer#footer-info{
   padding: 5px 0 0 0;
 }
 
-.address, .phone, .email{
+.address, .phone, .fax, .email{
   padding-right: 0px;
 }
 
-.address i, .phone i, .email i{
+.address i, .phone i, .fax i, .email i{
   background-color: #0088cc;
   color: #fff;
   font-size: 16px;
@@ -1794,4 +1800,8 @@ div.news:first-child{
 
 .news .news-detail .title{
   padding: 0;
+}
+
+.img-loading {
+  background: transparent url('../assets/loading_spinner.gif') center no-repeat;
 }

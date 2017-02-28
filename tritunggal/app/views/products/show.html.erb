@@ -33,16 +33,21 @@
 <div class="container">
   <%= render :partial => "shared/flash" %>
   <div class="col-xs-12 col-sm-6 product-detail-images">
-    <ul class="pgwSlideshow no-padding-lr">
-      <%# images = @product.product_images %>
-      <% @product_images.each do |product_image| %>
-        <li>
-          <%= link_to (image_tag product_image.image.url(:medium),
-                       :alt => " "),
-                       "#" %>
-        </li>
-      <% end %>
-    </ul>
+    <%= image_tag "loading_spinner.gif", :class => "img-responsive", :id => "img-spinner", :style=>"margin:auto" %>
+    <div id="pgw-conatiner" class="hide">
+      <ul class="pgwSlideshow no-padding-lr">
+        <% images = @product.product_images %>
+        <% @product_images.each do |product_image| %>
+          <li>
+            <%#= link_to (image_tag product_image.image.url(:medium),
+                         :alt => " "),
+                         "#" %>
+            <%= image_tag product_image.image.url(:medium), :alt => " " %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+   
   </div>
   <div class="col-xs-12 col-sm-6 product-detail-info">
     <div class="product-detail-name"><%= @product.name %></div>
@@ -69,7 +74,7 @@
                     <% if type.downcase == 'image' %>
                       <div class="col-xs-6 col-sm-3">
                         <div class="product-specification-box">
-                          <%= link_to (image_tag file.filename.url(:medium), :class => "img-responsive"),
+                          <%= link_to (image_tag file.filename.url(:medium), :class => "img-loading img-responsive"),
                                       file.filename.url, :title => file.filename.file.filename %>
                         </div>
                       </div>
@@ -92,7 +97,7 @@
                 <%= link_to raw("
                   <div class='col-xs-6 col-md-4 col-lg-3 no-padding-lr certificate'>
                     <div class='certificate-image'>
-                      #{image_tag certificate.image.url(:medium), :class => "img-responsive"}
+                      #{image_tag certificate.image.url(:medium), :class => "img-loading img-responsive"}
                     </div>
                     <div class='certificate-name'>
                       #{certificate.name}
@@ -118,7 +123,7 @@
                     <% if type.downcase == 'image' %>
                       <div class="col-xs-6 col-sm-3">
                         <div class="product-specification-box">
-                          <%= link_to (image_tag file.filename.url(:medium), :class => "img-responsive"),
+                          <%= link_to (image_tag file.filename.url(:medium), :class => "img-loading img-responsive"),
                                       file.filename.url, :title => file.filename.file.filename %>
                         </div>
                       </div>
@@ -149,7 +154,7 @@
           <div class="product-image">
             <% product.product_images.sample(2).each_with_index do |img, x| %>
               <% style = x%2 == 0 ? 'first-img' : 'second-img' %>
-              <%= link_to (image_tag img.image.url(:medium), :class => "img-responsive #{style}"),
+              <%= link_to (image_tag img.image.url(:medium), :class => "img-loading img-responsive #{style}"),
                         product_detail_path(:cat_permalink => @category.permalink,
                                             :prod_permalink => product.permalink) %>
             <% end %>
@@ -165,6 +170,10 @@
 
 <script>
   $(document).ready(function() {
+    $('img').load(function(){
+      $(this).css('background','none');
+    });
+
     $('#spec-image').magnificPopup({
       delegate: 'a', 
       type:'image',
@@ -176,6 +185,11 @@
         titleSrc: 'title'
       }
     });
+  });
+
+  $(window).on("load", function() {
+    $("#img-spinner").hide();
+    $("#pgw-conatiner").removeClass("hide");
   });
 
 </script>
