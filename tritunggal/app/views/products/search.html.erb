@@ -93,10 +93,11 @@
 </div>
 
 <script type="text/javascript">
+    $(window).on("load", function() {
+       $("img.img-loading").css('background','none');
+    });
+
     $(document).ready(function() {
-      $('img').load(function(){
-        $(this).css('background','none');
-      });
       $('#category-tree').jstree().bind("select_node.jstree", function (e, data) {
          var href = data.node.a_attr.href;
          document.location.href = href;

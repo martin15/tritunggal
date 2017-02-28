@@ -142,10 +142,12 @@
 </div>
 
 <script type="text/javascript">
+    $(window).on("load", function() {
+       $("img.img-loading").css('background','none');
+    });
+
     $(document).ready(function() {
-      $('img').load(function(){
-         $(this).css('background','none');
-      });
+
 
       $('label.tree-toggler').click(function () {
         //$("ul#parent > li > ul.son").hide();
