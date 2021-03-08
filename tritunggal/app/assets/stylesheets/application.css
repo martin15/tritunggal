@@ -942,8 +942,10 @@ button, .btn{
 }
 
 .home-about-us h3{
-  margin: 20px 0;
-  color: #fff;
+  margin: 20px 0 40px;
+  color: #666;
+  font-style: italic;
+  font-size: 25px;
 }
 
 .home-about-us a{
